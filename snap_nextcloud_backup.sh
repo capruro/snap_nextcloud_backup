@@ -2,8 +2,8 @@
 # Backup for Nextcloud
 #
 ## VARIABLES
-SNAPDIR={/snap/nextcloud/current}
-DATADIR={/var/snap/nextcloud/common/nextcloud/data}
+SNAPDIR={(/var/snap/nextcloud/current/ by default)}
+DATADIR={(/var/snap/nextcloud/common/ by default)}
 DESTDIR={/path/of/backup/nextcloud}
 
 ## CONS
