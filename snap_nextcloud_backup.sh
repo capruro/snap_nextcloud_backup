@@ -2,13 +2,13 @@
 # Backup for Nextcloud
 #
 ## VARIABLES
-SNAPDIR=/var/snap/nextcloud/current/ #by default
-DATADIR=/var/snap/nextcloud/common/ #by default
+DATADIR=/var/snap/nextcloud/common #by default
 DESTDIR=/path/of/backup/nextcloud
 
 ## CONS
 NAME=$(uname -n)
 DATE=$(date +'%Y-%m-%d')
+BCKDIR=/var/snap/nextcloud/common/backups
 
 ## SUB
 info()
@@ -19,36 +19,42 @@ info()
 info "Checking Backup destination"
 if [[ -d $DESTDIR ]]
 then
-        info "Destination exist"
+    info "Destination exist"
 else
-        info "Creating destination folder"
-        mkdir -p $DESTDIR/snap
-        chmod -r 700 $DESTDIR
+    info "Creating destination folder"
+    mkdir -p $DESTDIR/snap
+    chmod -r 700 $DESTDIR
 fi
+
+
+# backup Nextcloud
+info "Backing up Snap folder"
+nextcloud.export -abc
+if [[ $? == 0 ]]
+then
+    LASTBCK=`ls -tr -1 $BCKDIR | tail -1`
+    info "Archiving Snap confing backup"
+    tar -zcvf $DESTDIR/snap/$LASTBCK\_nextcloud-backup.tar.gz $BCKDIR/$LASTBCK
+    info "Removing temporary folder"
+    rm -Rf $BCKDIR/$LAST
+else
+    info "Nextcloud export failed, exiting..."
+    exit 1
+fi
+
 
 info "Stopping Nextcloud"
 snap stop nextcloud
 
-# backup Nextcloud
-if [[ -d $SNAPDIR ]]
-then
-        cd $SNAPDIR
-        info "Backing up Snap config folder"
-        tar -zcvf $DESTDIR/snap/nextcloud.snap.backup-$DATE.tar.gz .
-else
-        info "Snap Directory doesn't exist, exiting..."
-        exit 1
-fi
-
 # backup Data
 if [[ -d $DATADIR ]]
 then
-        cd $DATADIR
-        info "Backing up Data folder"
-        rsync -Pour $DATADIR $DESTDIR
+    cd $DATADIR
+    info "Backing up Data folder"
+    rsync -azP $DATADIR $DESTDIR
 else
-        info "Data Directory doesn't exist, exiting..."
-        exit 1
+    info "Data Directory doesn't exist, exiting..."
+    exit 1
 fi
 
 info "Starting Nextcloud"
