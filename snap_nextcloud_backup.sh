@@ -2,9 +2,9 @@
 # Backup for Nextcloud
 #
 ## VARIABLES
-SNAPDIR={(/var/snap/nextcloud/current/ by default)}
-DATADIR={(/var/snap/nextcloud/common/ by default)}
-DESTDIR={/path/of/backup/nextcloud}
+SNAPDIR=/var/snap/nextcloud/current/ #by default
+DATADIR=/var/snap/nextcloud/common/ #by default
+DESTDIR=/path/of/backup/nextcloud
 
 ## CONS
 NAME=$(uname -n)
