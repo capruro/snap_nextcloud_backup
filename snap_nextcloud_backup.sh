@@ -42,14 +42,12 @@ else
     exit 1
 fi
 
-
-info "Stopping Nextcloud"
-snap stop nextcloud
-
 # backup Data
 if [[ -d $DATADIR ]]
 then
     cd $DATADIR
+    info "Stopping Nextcloud"
+    snap stop nextcloud
     info "Backing up Data folder"
     rsync -azP $DATADIR $DESTDIR
 else
