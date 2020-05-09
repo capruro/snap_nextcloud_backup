@@ -17,6 +17,6 @@ you would choose a path of a secondary disk mounted in your system.
 `DATADIR=/var/snap/nextcloud/common #by default`
 
 After you set up the variables you are good to run:
-sudo snap_nextcloud_backup.sh
+`sudo snap_nextcloud_backup.sh`
 
 If everything goes well you can schedule it on crontab.
