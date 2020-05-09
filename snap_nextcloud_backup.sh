@@ -50,11 +50,11 @@ then
     snap stop nextcloud
     info "Backing up Data folder"
     rsync -azP $DATADIR $DESTDIR
+    info "Starting Nextcloud"
+    snap start nextcloud
 else
     info "Data Directory doesn't exist, exiting..."
     exit 1
 fi
 
-info "Starting Nextcloud"
-snap start nextcloud
 info "Backup Completed"
