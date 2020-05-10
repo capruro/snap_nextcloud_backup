@@ -20,3 +20,8 @@ After you set up the variables you are good to run:
 `sudo snap_nextcloud_backup.sh`
 
 If everything goes well you can schedule it on crontab.
+
+# Coming Soon
+[ ] remote backup script
+[ ] restore script
+[ ] backup encryption
