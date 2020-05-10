@@ -22,6 +22,6 @@ After you set up the variables you are good to run:
 If everything goes well you can schedule it on crontab.
 
 # Coming Soon
-[ ] remote backup script
-[ ] restore script
-[ ] backup encryption
+- [ ] restore script
+- [ ] remote backup script
+- [ ] backup encryption
