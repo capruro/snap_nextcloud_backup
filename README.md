@@ -9,7 +9,7 @@ In addition it use rsync for an incremental data backup, instead of copy everyth
 <br />
 
 # How to use it
-First you need to run the `sturtup.sh` script, choosing your data directory:<br />
+First you need to run the `firstrun.sh` script, choosing your data directory:<br />
 `/var/snap/nextcloud/common #by default`<br />
 <br />
  And your destination directory:<br />
