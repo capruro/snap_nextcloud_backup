@@ -3,7 +3,7 @@
 #
 ## VARIABLES
 DATADIR=/var/snap/nextcloud/common #by default
-DESTDIR=/path/of/backup/nextcloud
+DESTDIR=/path/of/nextcloud/backup
 
 ## CONS
 NAME=$(uname -n)
@@ -17,13 +17,13 @@ info()
 } # end info
 
 info "Checking Backup destination"
-if [[ -d $DESTDIR ]]
+if [[ -d ${DESTDIR} ]]
 then
     info "Destination exist"
 else
     info "Creating destination folder"
-    mkdir -p $DESTDIR/snap
-    chmod -r 700 $DESTDIR
+    mkdir -p ${DESTDIR}/snap
+    chmod -r 700 ${DESTDIR}
 fi
 
 
@@ -32,24 +32,24 @@ info "Backing up Snap folder"
 /snap/bin/nextcloud.export -abc
 if [[ $? == 0 ]]
 then
-    LASTBCK=`ls -tr -1 $BCKDIR | tail -1`
+    LASTBCK=`ls -tr -1 ${BCKDIR} | tail -1`
     info "Archiving Snap confing backup"
-    tar -zcvf $DESTDIR/snap/$LASTBCK\_nextcloud-backup.tar.gz $BCKDIR/$LASTBCK
-    info "Removing temporary folder"
-    rm -Rf $BCKDIR/$LAST
+    tar -zcvf ${DESTDIR}/snap/${LASTBCK}\_nextcloud-backup.tar.gz ${BCKDIR}/${LASTBCK}
+    info "Removing local backup"
+    rm -Rf ${BCKDIR}/${LAST}
 else
     info "Nextcloud export failed, exiting..."
     exit 1
 fi
 
 # backup Data
-if [[ -d $DATADIR ]]
+if [[ -d ${DATADIR} ]]
 then
-    cd $DATADIR
+    cd ${DATADIR}
     info "Stopping Nextcloud"
     snap stop nextcloud
     info "Backing up Data folder"
-    rsync -azP $DATADIR $DESTDIR
+    rsync -azP ${DATADIR} ${DESTDIR}
     info "Starting Nextcloud"
     snap start nextcloud
 else
