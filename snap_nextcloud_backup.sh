@@ -29,7 +29,7 @@ fi
 
 # backup Nextcloud
 info "Backing up Snap folder"
-nextcloud.export -abc
+/snap/bin/nextcloud.export -abc
 if [[ $? == 0 ]]
 then
     LASTBCK=`ls -tr -1 $BCKDIR | tail -1`
