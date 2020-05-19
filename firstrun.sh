@@ -6,7 +6,7 @@
 ## VARIABLES
 FLAG=0
 
-if [[ `snap list nextcloud | wc -l` -gt 2 ]]
+if [[ -d /var/snap/nextcloud/ ]]
 then
 else
     echo "You might want to snap install nextcloud first"
