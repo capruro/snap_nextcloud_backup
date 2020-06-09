@@ -4,6 +4,7 @@
 ## VARIABLES
 DATADIR=/var/snap/nextcloud/common #by default
 DESTDIR=/path/of/nextcloud/backup
+
 # How many snap backup do you want to keep?
 NUMBCK='6'
 
