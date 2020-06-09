@@ -34,7 +34,7 @@ if [[ $? == 0 ]]
 then
     LASTBCK=`ls -tr -1 ${BCKDIR} | tail -1`
     info "Archiving Snap confing backup"
-    tar -zcvf ${DESTDIR}/snap/${LASTBCK}\_nextcloud-backup.tar.gz ${BCKDIR}/${LASTBCK}
+    tar -zcf ${DESTDIR}/snap/${LASTBCK}\_nextcloud-backup.tar.gz ${BCKDIR}/${LASTBCK}
     info "Removing local backup"
     rm -Rf ${BCKDIR}/${LAST}
 else
@@ -49,7 +49,7 @@ then
     info "Stopping Nextcloud"
     snap stop nextcloud
     info "Backing up Data folder"
-    rsync -azP ${DATADIR} ${DESTDIR}
+    rsync -azP --delete ${DATADIR} ${DESTDIR}
     info "Starting Nextcloud"
     snap start nextcloud
 else

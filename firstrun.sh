@@ -54,8 +54,8 @@ do
     fi
 done
 
-sed -i "s%^DATADIR=.*%DATADIR=${DATADIR}%" snap_nextcloud_backup.sh
-sed -i "s%^DESTDIR=.*%DESTDIR=${DESTDIR}%" snap_nextcloud_backup.sh
+sed -i "s%^DATADIR=.*%DATADIR=${DATADIR}%" variables
+sed -i "s%^DESTDIR=.*%DESTDIR=${DESTDIR}%" variables
 
 echo "enjoy your nextcloud, stay safe with your backup"
 echo "it's strongly recommended to schedule it in crontab"
