@@ -4,6 +4,8 @@
 ## VARIABLES
 DATADIR=/var/snap/nextcloud/common #by default
 DESTDIR=/path/of/nextcloud/backup
+# How many snap backup do you want to keep?
+NUMBCK='6'
 
 ## CONS
 NAME=$(uname -n)
@@ -29,7 +31,7 @@ fi
 
 # backup Nextcloud
 info "Backing up Snap folder"
-/snap/bin/nextcloud.export -abc
+/snap/bin/nextcloud.export -abc 
 if [[ $? == 0 ]]
 then
     LASTBCK=`ls -tr -1 ${BCKDIR} | tail -1`
@@ -41,6 +43,9 @@ else
     info "Nextcloud export failed, exiting..."
     exit 1
 fi
+
+# rotate snap backup, keep last ${NUMBCK} 
+ls -tp ${BCKDIR} | tail -n +$((${NUMBCK} + 1 )) | xargs -I {} rm -- ${BCKDIR}{}
 
 # backup Data
 if [[ -d ${DATADIR} ]]
