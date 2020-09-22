@@ -6,12 +6,11 @@
 ## VARIABLES
 FLAG=0
 
-if [[ -d /var/snap/nextcloud/ ]]
+if [[ ! -d /var/snap/nextcloud/ ]]
 then
-else
     echo "You might want to snap install nextcloud first"
     exit 1
-done
+fi
 
 if [[ -f snap_nextcloud_backup.sh ]]
 then
